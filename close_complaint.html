@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update & Close IT Complaint</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Fallback background */
+            background-image: radial-gradient(at 0% 0%, hsla(212, 45%, 95%, 1) 0px, transparent 50%),
+                              radial-gradient(at 100% 0%, hsla(208, 65%, 90%, 1) 0px, transparent 50%);
+        }
+        .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+        .form-container {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .form-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.15);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <div class="w-full max-w-2xl mx-auto bg-slate-50 p-8 sm:p-10 rounded-xl shadow-lg form-container border border-gray-200">
+        <div class="text-center mb-8">
+            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
+                <svg class="h-6 w-6 text-green-600" xmlns="http://www.w.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <h1 class="text-3xl font-bold text-gray-800 mt-4 font-poppins">Update Complaint Status</h1>
+            <p class="text-gray-500 mt-2">Enter the Complaint ID and fill in the resolution details.</p>
+        </div>
+
+        <form name="submit-to-google-sheet" id="updateForm">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Complaint ID -->
+                <div class="md:col-span-2">
+                    <label for="complaintId" class="block text-sm font-medium text-gray-700">Complaint ID</label>
+                    <input type="text" name="Complaint ID" id="complaintId" required placeholder="e.g., IT-1001" class="mt-1 block w-full px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <!-- Status -->
+                <div>
+                    <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+                    <select id="status" name="Status" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">Select Status</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Resolved">Resolved</option>
+                        <option value="Closed">Closed</option>
+                    </select>
+                </div>
+
+                <!-- Attended By -->
+                <div>
+                    <label for="attendedBy" class="block text-sm font-medium text-gray-700">Attended By</label>
+                    <input type="text" name="Attended By" id="attendedBy" required class="mt-1 block w-full px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <!-- Nature of ComplaintItem -->
+                <div>
+                    <label for="natureOfComplaint" class="block text-sm font-medium text-gray-700">Nature of Complaint</label>
+                    <input type="text" name="Nature of ComplaintItem" id="natureOfComplaint" class="mt-1 block w-full px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                 <!-- Part Name -->
+                <div>
+                    <label for="partName" class="block text-sm font-medium text-gray-700">Part Name (if any)</label>
+                    <input type="text" name="Part Name" id="partName" class="mt-1 block w-full px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <!-- Price -->
+                 <div class="md:col-span-2">
+                    <label for="price" class="block text-sm font-medium text-gray-700">Price (if any)</label>
+                    <input type="number" name="Price" id="price" class="mt-1 block w-full px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <!-- Resolution Notes -->
+                <div class="md:col-span-2">
+                    <label for="resolutionNotes" class="block text-sm font-medium text-gray-700">Resolution Notes</label>
+                    <textarea name="Resolution Notes" id="resolutionNotes" rows="4" required class="mt-1 block w-full px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
+                </div>
+            </div>
+
+            <div class="mt-8">
+                <button type="submit" id="submitButton" class="w-full inline-flex items-center justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-300">
+                    <svg class="w-5 h-5 mr-2 -ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0011.664 0l3.181-3.183m-4.991-2.693L19.015 7.74M5.985 19.644L19.015 7.74m0 0h-4.992m4.992 0v4.992" />
+                    </svg>
+                    Update Complaint
+                </button>
+            </div>
+        </form>
+        <div id="message" class="mt-6 text-center text-sm"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('updateForm');
+        const submitButton = document.getElementById('submitButton');
+        const messageDiv = document.getElementById('message');
+        
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxnQtT_dpzAuh8x6PvjESi6rSWF5bC2tSnwxJ6sTflZCBuhXGx_je8ArJhzemLpjYM/exec';
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            
+            submitButton.disabled = true;
+            submitButton.innerHTML = `
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Updating...`;
+            
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            data.type = 'update';
+
+            fetch(scriptURL, { method: 'POST', body: JSON.stringify(data) })
+                .then(response => response.json())
+                .then(result => {
+                    console.log('Success:', result);
+                    if (result.status === 'success') {
+                        messageDiv.innerHTML = `<p class="text-green-600 font-semibold">Success! The complaint has been updated.</p>`;
+                        form.reset();
+                    } else {
+                        throw new Error(result.message || 'An unknown error occurred.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    messageDiv.innerHTML = `<p class="text-red-600 font-semibold">Error! Could not update the complaint. ${error.message}</p>`;
+                })
+                .finally(() => {
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = `
+                        <svg class="w-5 h-5 mr-2 -ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                           <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0011.664 0l3.181-3.183m-4.991-2.693L19.015 7.74M5.985 19.644L19.015 7.74m0 0h-4.992m4.992 0v4.992" />
+                        </svg>
+                        Update Complaint`;
+                });
+        });
+    </script>
+
+</body>
+</html>
+
