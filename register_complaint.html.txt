@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Complaint Registration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Fallback background */
+            background-image: radial-gradient(at 0% 0%, hsla(212, 45%, 95%, 1) 0px, transparent 50%),
+                              radial-gradient(at 100% 0%, hsla(208, 65%, 90%, 1) 0px, transparent 50%);
+        }
+        .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+        .form-container {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .form-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.15);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <div class="w-full max-w-2xl mx-auto bg-slate-50 p-8 sm:p-10 rounded-xl shadow-lg form-container border border-gray-200">
+        <div class="text-center mb-8">
+            <!-- Professional Icon for Support -->
+            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-blue-100">
+                <svg class="h-6 w-6 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                </svg>
+            </div>
+            <h1 class="text-3xl font-bold text-gray-800 mt-4 font-poppins">IT Service Request</h1>
+            <p class="text-gray-500 mt-2">Please fill out the form below to submit a new complaint.</p>
+        </div>
+
+        <form name="submit-to-google-sheet" id="complaintForm">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Employee ID -->
+                <div>
+                    <label for="employeeId" class="block text-sm font-medium text-gray-700">Employee ID</label>
+                    <input type="text" name="Employee ID" id="employeeId" required class="mt-1 block w-full px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <!-- Employee Name -->
+                <div>
+                    <label for="employeeName" class="block text-sm font-medium text-gray-700">Employee Name</label>
+                    <input type="text" name="Employee Name" id="employeeName" required class="mt-1 block w-full px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <!-- Location -->
+                <div>
+                    <label for="location" class="block text-sm font-medium text-gray-700">Location</label>
+                    <input type="text" name="Location" id="location" required class="mt-1 block w-full px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <!-- Department -->
+                <div>
+                    <label for="department" class="block text-sm font-medium text-gray-700">Department</label>
+                    <input type="text" name="Department" id="department" required class="mt-1 block w-full px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <!-- Complaint Item Name -->
+                <div class="md:col-span-2">
+                    <label for="complaintItem" class="block text-sm font-medium text-gray-700">Complaint Item Name</label>
+                    <input type="text" name="Complaint Item Name" id="complaintItem" required placeholder="e.g., Laptop, Printer, Software Issue" class="mt-1 block w-full px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <!-- Complaint Description -->
+                <div class="md:col-span-2">
+                    <label for="complaintDescription" class="block text-sm font-medium text-gray-700">Complaint Description</label>
+                    <textarea name="Complaint Description" id="complaintDescription" rows="4" required class="mt-1 block w-full px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
+                </div>
+                <!-- Priority -->
+                <div class="md:col-span-2">
+                    <label for="priority" class="block text-sm font-medium text-gray-700">Priority</label>
+                    <select id="priority" name="Priority" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">Select Priority</option>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mt-8">
+                <button type="submit" id="submitButton" class="w-full inline-flex items-center justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300">
+                    <svg class="w-5 h-5 mr-2 -ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 10.5v6m3-3H9m4.06-7.19l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
+                    </svg>
+                    Submit Complaint
+                </button>
+            </div>
+        </form>
+        <div id="message" class="mt-6 text-center text-sm"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('complaintForm');
+        const submitButton = document.getElementById('submitButton');
+        const messageDiv = document.getElementById('message');
+        
+        // Yahan aapka naya deploy kiya hua URL hai
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxnQtT_dpzAuh8x6PvjESi6rSWF5bC2tSnwxJ6sTflZCBuhXGx_je8ArJhzemLpjYM/exec';
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            
+            submitButton.disabled = true;
+            submitButton.innerHTML = `
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Submitting...`;
+            
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            data.type = 'register';
+
+            fetch(scriptURL, { method: 'POST', body: JSON.stringify(data) })
+                .then(response => response.json())
+                .then(result => {
+                    console.log('Success:', result);
+                    if (result.status === 'success') {
+                        messageDiv.innerHTML = `<p class="text-green-600 font-semibold">Success! Your complaint has been registered with ID: ${result.complaintId}</p>`;
+                        form.reset();
+                    } else {
+                        throw new Error(result.message || 'An unknown error occurred.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    messageDiv.innerHTML = `<p class="text-red-600 font-semibold">Error! Could not submit the form. ${error.message}</p>`;
+                })
+                .finally(() => {
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = `
+                        <svg class="w-5 h-5 mr-2 -ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 10.5v6m3-3H9m4.06-7.19l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
+                        </svg>
+                        Submit Complaint`;
+                });
+        });
+    </script>
+
+</body>
+</html>
+
