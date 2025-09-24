@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Purchase Requisition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            background-image: radial-gradient(at 0% 100%, hsla(212, 45%, 95%, 1) 0px, transparent 50%),
+                              radial-gradient(at 100% 0%, hsla(208, 65%, 90%, 1) 0px, transparent 50%);
+        }
+        .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <div class="w-full max-w-2xl mx-auto bg-slate-50 p-8 sm:p-10 rounded-xl shadow-lg border border-gray-200">
+        <div class="text-center mb-8">
+            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-orange-100">
+                <svg class="h-6 w-6 text-orange-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c.51 0 .962-.343 1.087-.835l1.838-5.513a1.875 1.875 0 00-1.087-2.336H6.645M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
+                </svg>
+            </div>
+            <h1 class="text-3xl font-bold text-gray-800 mt-4 font-poppins">IT Purchase Request</h1>
+            <p class="text-gray-500 mt-2">Fill out this form to request a new IT asset or part.</p>
+        </div>
+
+        <form name="submit-to-google-sheet" id="purchaseForm">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Requested By -->
+                <div>
+                    <label for="requestedBy" class="block text-sm font-medium text-gray-700">Requested By</label>
+                    <select name="Requested By" id="requestedBy" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+                        <option value="">Select Member</option>
+                        <option value="Bhanu Mishra">Bhanu Mishra</option>
+                        <option value="Team Member 2">Team Member 2</option>
+                        <option value="Team Member 3">Team Member 3</option>
+                    </select>
+                </div>
+                <!-- Request Date -->
+                 <div>
+                    <label for="requestDate" class="block text-sm font-medium text-gray-700">Request Date</label>
+                    <input type="date" name="Request Date" id="requestDate" required class="mt-1 block w-full px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+                </div>
+
+                <!-- Item Name -->
+                <div class="md:col-span-2">
+                    <label for="itemName" class="block text-sm font-medium text-gray-700">Item Name / Description</label>
+                    <input type="text" name="Item Name" id="itemName" required placeholder="e.g., Logitech MK270 Wireless Keyboard & Mouse Combo" class="mt-1 block w-full px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+                </div>
+
+                <!-- Quantity -->
+                <div>
+                    <label for="quantity" class="block text-sm font-medium text-gray-700">Quantity</label>
+                    <input type="number" name="Quantity" id="quantity" required value="1" min="1" class="mt-1 block w-full px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+                </div>
+                <!-- Estimated Price -->
+                <div>
+                    <label for="estimatedPrice" class="block text-sm font-medium text-gray-700">Estimated Price (per item, ₹)</label>
+                    <input type="number" name="Estimated Price" id="estimatedPrice" required placeholder="e.g., 1500" class="mt-1 block w-full px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+                </div>
+
+                 <!-- Reason for Purchase -->
+                <div class="md:col-span-2">
+                    <label for="reason" class="block text-sm font-medium text-gray-700">Reason for Purchase</label>
+                    <textarea name="Reason" id="reason" rows="3" required placeholder="e.g., Replacement for a broken keyboard for employee XYZ" class="mt-1 block w-full px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500"></textarea>
+                </div>
+            </div>
+
+            <div class="mt-8">
+                <button type="submit" id="submitButton" class="w-full inline-flex items-center justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-all duration-300">
+                    Submit for Approval
+                </button>
+            </div>
+        </form>
+        <div id="message" class="mt-6 text-center text-sm"></div>
+    </div>
+
+    <script>
+        document.getElementById('requestDate').valueAsDate = new Date();
+        const form = document.getElementById('purchaseForm');
+        const submitButton = document.getElementById('submitButton');
+        const messageDiv = document.getElementById('message');
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxnQtT_dpzAuh8x6PvjESi6rSWF5bC2tSnwxJ6sTflZCBuhXGx_je8ArJhzemLpjYM/exec';
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
+            
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            data.type = 'purchase_request'; // This is a new type
+
+            fetch(scriptURL, { method: 'POST', body: JSON.stringify(data) })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.status === 'success') {
+                        messageDiv.innerHTML = `<p class="text-green-600 font-semibold">Success! Your request has been submitted for approval.</p>`;
+                        form.reset();
+                        document.getElementById('requestDate').valueAsDate = new Date();
+                    } else { throw new Error(result.message); }
+                })
+                .catch(error => {
+                    messageDiv.innerHTML = `<p class="text-red-600 font-semibold">Error! Could not submit request. ${error.message}</p>`;
+                })
+                .finally(() => {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Submit for Approval';
+                });
+        });
+    </script>
+</body>
+</html>
