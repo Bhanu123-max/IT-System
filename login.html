@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - IT Management System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            background-image: radial-gradient(at 0% 0%, hsla(212, 45%, 95%, 1) 0px, transparent 50%),
+                              radial-gradient(at 100% 100%, hsla(208, 65%, 90%, 1) 0px, transparent 50%);
+        }
+        .font-poppins { font-family: 'Poppins', sans-serif; }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <div class="w-full max-w-sm mx-auto bg-slate-50 p-8 rounded-xl shadow-lg border border-gray-200">
+        <div class="text-center mb-8">
+            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-indigo-100">
+                 <svg class="h-6 w-6 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                   <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                 </svg>
+            </div>
+            <h1 class="text-3xl font-bold text-gray-800 mt-4 font-poppins">System Login</h1>
+            <p class="text-gray-500 mt-2">Please enter your credentials.</p>
+        </div>
+
+        <form id="loginForm">
+            <div class="space-y-6">
+                <div>
+                    <label for="userId" class="block text-sm font-medium text-gray-700">User ID</label>
+                    <input type="text" id="userId" required class="mt-1 block w-full px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                 <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" id="password" required class="mt-1 block w-full px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+            </div>
+
+            <div class="mt-8">
+                <button type="submit" class="w-full inline-flex items-center justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Login
+                </button>
+            </div>
+            <div class="text-center mt-4">
+                 <a href="forgot_password.html" class="text-sm text-indigo-600 hover:text-indigo-500">Forgot Password?</a>
+            </div>
+            <p id="errorMessage" class="text-red-500 text-sm text-center mt-4"></p>
+        </form>
+    </div>
+
+    <script>
+        localStorage.removeItem('userRole');
+
+        const loginForm = document.getElementById('loginForm');
+        const errorMessage = document.getElementById('errorMessage');
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const userId = document.getElementById('userId').value.trim();
+            const password = document.getElementById('password').value;
+
+            if (userId === 'CPLEMP' && password === 'CP123') {
+                localStorage.setItem('userRole', 'employee');
+                window.location.href = './index.html';
+            } 
+            else if (userId === 'CPLIT' && password === 'CPL123') {
+                localStorage.setItem('userRole', 'it_admin');
+                window.location.href = './index.html';
+            } 
+            else {
+                errorMessage.textContent = 'Invalid User ID or Password.';
+            }
+        });
+    </script>
+
+</body>
+</html>
+
